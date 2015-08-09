@@ -13,6 +13,17 @@
         host: '127.0.0.1'
     });
 
+    // Setting a basic route
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
+            reply({
+                message: 'Welcome to our Beer API, cheers!'
+            })
+        }
+    });
+
     // Start our server and connections
     server.start(function (err) {
         if (err) {
