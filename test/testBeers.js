@@ -27,7 +27,10 @@
             });
 
             it('should fail on abv validation when creating', function () {
-
+                var beer = new Beer({ name: 'Stinger', abv: -10 });
+                beer.save(function (err) {
+                    expect(err).not.to.be.null;
+                });
             });
         });
     });
