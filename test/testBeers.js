@@ -15,8 +15,19 @@
             it('should create a beer object', function () {
                 var beer = new Beer({ name: 'Stinger' });
                 beer.save(function (err) {
-                    expect(err).to.be.a('null');
+                    expect(err).to.be.null;
                 });
+            });
+
+            it('should fail name validation when creating', function () {
+                var beer = new Beer();
+                beer.save(function (err) {
+                    expect(err).not.to.be.null;
+                });
+            });
+
+            it('should fail on abv validation when creating', function () {
+
             });
         });
     });
