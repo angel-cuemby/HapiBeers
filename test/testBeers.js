@@ -4,16 +4,18 @@
     var mocha = require('mocha'),
         chai = require('chai');
 
-    var expect = chai.expect();
-    var Beer = require('../src/models/beer').Beer;
+    var expect = chai.expect(),
+        mongoose = require('mongoose'),
+        Beer = require('../src/models/beer').Beer;
 
     describe('Beers', function () {
-        var mockBeer = new Beer({ name: 'Stinger' });
+        mongoose.connect('dockerhost.local', 'hapiBeerTest');
+
         describe('#saveBeer', function () {
-            it('should create a beer object', function (done) {
-                Beer.create({ name: 'Stinger' }, function (err, beer) {
-                    expect(!err).to.be.true;
-                    return done();
+            it('should create a beer object', function () {
+                var beer = new Beer({ name: 'Stinger' });
+                beer.save(function (err) {
+                    expect(err).to.be.a('null');
                 });
             });
         });
