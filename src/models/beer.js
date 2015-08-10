@@ -6,7 +6,7 @@
         Joi = require('joi');
 
     var beerSchema = new Schema({
-        name: String,
+        name: { type: String, required: true },
         abv: {type: Number, min: 0.1},
         ibu: {type: Number},
         srm: {type: Number},
@@ -18,12 +18,10 @@
 
     var Beer = mongoose.model('Beer', beerSchema);
 
-    Beer.schema.path('name').validate(function validateName(value, respond) {
-        var name = Joi.string().required();
-        name.validate(value, function (err) {
-            return respond(!err);
-        });
-    }, 'validation of `{PATH}` failed with value `{VALUE}`');
+    Beer.schema.path('abv').validate(function (val) {
+        var validation = Joi.number().precision(2).positive().validate(val);
+        return !val.err;
+    });
 
     exports.Beer = Beer;
 
