@@ -1,5 +1,15 @@
 {
   "dependencies": {
-    "hapi": "^8.8.1"
+    "hapi": "^8.8.1",
+    "joi": "^6.6.1",
+    "mongoose": "^4.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node_modules/mocha/bin/mocha --timeout 15000 --colors --growl --reporter nyan --recursive --full-trace --ui bdd"
   }
 }
